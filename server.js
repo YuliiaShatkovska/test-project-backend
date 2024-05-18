@@ -1,14 +1,8 @@
-import cron from "node-cron";
 import { createConection } from "./helpers/connectMongo.js";
 import { app } from "./app.js";
-import { sendDailyEmails } from "./controllers/emailController.js";
+import "./helpers/emailSendSchedule.js";
 
 const { PORT } = process.env;
-
-cron.schedule("0 12 * * *", () => {
-  console.log("Запуск розсилки електронних листів щоденно о 11:00");
-  sendDailyEmails();
-});
 
 const startServer = async () => {
   try {

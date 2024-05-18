@@ -5,10 +5,10 @@ export const createTransporter = () => {
   return nodemailer.createTransport({
     host: "smtp.ukr.net",
     port: 465,
-    secure: false,
+    secure: true,
     auth: {
       user: UKR_NET_FROM,
-      password: UKR_PASSWORD,
+      pass: UKR_PASSWORD,
     },
   });
 };

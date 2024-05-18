@@ -5,6 +5,4 @@ const subscriptionRouter = express.Router();
 
 subscriptionRouter.post("/subscribe", userSubscription);
 
-// subscriptionRouter.get("/send", sendDailyEmails);
-
 export default subscriptionRouter;
