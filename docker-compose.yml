@@ -1,0 +1,90 @@
+# services:
+#   app:
+#     image: node:20.11.1
+#     container_name: app_main
+
+#     command: sh -c "npm install && npm start"
+#     ports:
+#       - 3005:3005
+#     working_dir: /app
+#     volumes:
+#       - ./:/app
+#     environment:
+#       MONGO_HOST: localhost
+
+#       MONGO_DB: mongodb+srv://Yuliia:SCUVMcyo193csR6g@cluster0.qx0d0m0.mongodb.net/ExchangeCurrency?retryWrites=true&w=majority&appName=Cluster0
+#   mongo:
+#     image: mongo
+#     container_name: app_mongo
+
+#     volumes:
+#       - ~/mongo:/data/db
+#     environment:
+#       MONGO_DB: mongodb+srv://Yuliia:SCUVMcyo193csR6g@cluster0.qx0d0m0.mongodb.net/ExchangeCurrency?retryWrites=true&w=majority&appName=Cluster0
+# volumes:
+#   mongodb:
+
+# services:
+#   app:
+#     build: .
+#     ports:
+#       - "3005:3005"
+#     environment:
+#       MONGO_URI: mongodb+srv://Yuliia:SCUVMcyo193csR6g@cluster0.qx0d0m0.mongodb.net/ExchangeCurrency?retryWrites=true&w=majority&appName=Cluster0
+#     depends_on:
+#       - mongo
+#   mongo:
+#     image: mongo
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo-data:/data/db
+# volumes:
+
+services:
+  frontend:
+    build:
+      context: frontend
+
+    ports:
+      - 3000:3000
+    stdin_open: true
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    networks:
+      - react-express
+    depends_on:
+      - backend
+
+  backend:
+    restart: always
+    build:
+      context: backend
+
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+    networks:
+      - express-mongo
+      - react-express
+    expose:
+      - 3000
+  mongo:
+    restart: always
+    image: mongo:4.2.0
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - express-mongo
+    expose:
+      - 27017
+networks:
+  react-express:
+  express-mongo:
+
+volumes:
+  mongo_data:
