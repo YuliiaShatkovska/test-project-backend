@@ -1,7 +1,6 @@
 import { createConection } from "./helpers/connectMongo.js";
 import { app } from "./app.js";
 import cron from "node-cron";
-// import "./helpers/emailSendSchedule.js";
 
 import { sendDailyEmail } from "./controllers/emailController.js";
 
@@ -14,7 +13,7 @@ const startServer = async () => {
       console.log("Server is running!");
 
       cron.schedule(
-        "40 10 * * *",
+        "0 10 * * *",
         async () => {
           try {
             console.log("Запуск розсилки електронних листів щоденно о 10:00");
