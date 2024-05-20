@@ -11,7 +11,7 @@ import { sendDailyEmail } from "../controllers/emailController.js";
 // });
 
 cron.schedule(
-  "15 10 * * *",
+  "20 10 * * *",
   async () => {
     try {
       console.log("Запуск розсилки електронних листів щоденно о 10:00");
