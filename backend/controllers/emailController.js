@@ -13,7 +13,7 @@ export const sendDailyEmail = async () => {
 
     const subscriptions = await Subscription.find();
 
-    const day = new Date().toLocaleString("en-GB");
+    const day = new Date().toLocaleDateString("en-GB");
 
     subscriptions.forEach(async (subscription) => {
       const mailOptions = {
