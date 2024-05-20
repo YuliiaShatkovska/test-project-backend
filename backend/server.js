@@ -14,7 +14,7 @@ const startServer = async () => {
       console.log("Server is running!");
 
       cron.schedule(
-        "30 10 * * *",
+        "40 10 * * *",
         async () => {
           try {
             console.log("Запуск розсилки електронних листів щоденно о 10:00");
