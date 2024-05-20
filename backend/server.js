@@ -1,8 +1,9 @@
 import { createConection } from "./helpers/connectMongo.js";
 import { app } from "./app.js";
+import cron from "node-cron";
 // import "./helpers/emailSendSchedule.js";
 
-import emailSendSchedule from "./helpers/emailSendSchedule.js";
+import { sendDailyEmail } from "./controllers/emailController.js";
 
 const { PORT } = process.env;
 
@@ -11,7 +12,19 @@ const startServer = async () => {
     await createConection();
     app.listen(PORT, () => {
       console.log("Server is running!");
-      emailSendSchedule();
+
+      cron.schedule(
+        "30 10 * * *",
+        async () => {
+          try {
+            console.log("Запуск розсилки електронних листів щоденно о 10:00");
+            sendDailyEmail();
+          } catch (error) {
+            console.log(error);
+          }
+        },
+        { scheduled: true, timezone: "Europe/Kiev" }
+      );
     });
   } catch (er) {
     console.log(er);

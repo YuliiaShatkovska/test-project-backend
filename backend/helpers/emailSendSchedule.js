@@ -10,15 +10,15 @@ import { sendDailyEmail } from "../controllers/emailController.js";
 //   }
 // });
 
-cron.schedule(
-  "20 10 * * *",
-  async () => {
-    try {
-      console.log("Запуск розсилки електронних листів щоденно о 10:00");
-      sendDailyEmail();
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  { scheduled: true, timezone: "Europe/Kiev" }
-);
+// export const emailSendSchedule = cron.schedule(
+//   "20 10 * * *",
+//   async () => {
+//     try {
+//       console.log("Запуск розсилки електронних листів щоденно о 10:00");
+//       sendDailyEmail();
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   },
+//   { scheduled: true, timezone: "Europe/Kiev" }
+// );
