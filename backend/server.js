@@ -22,7 +22,7 @@ const startServer = async () => {
             console.log(error);
           }
         },
-        { scheduled: true }
+        { scheduled: true, timezone: "Europe/Kiev" }
       );
     });
   } catch (er) {
